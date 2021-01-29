@@ -1,0 +1,51 @@
+version: "3.8"
+networks:
+  cas-net:
+    driver: bridge
+
+
+services:
+  redis:
+    image: "redis:alpine"
+    expose:
+      - 6379
+    networks:
+      - cas-net
+    restart: unless-stopped
+  cas_redis2divera247:
+    image: tobsa/cas_redis2http:latest
+    volumes:
+      - /opt/cas/config.json:/opt/config.json:ro
+    environment:
+      REDIS_HOST: redis
+    depends_on:
+      - redis
+    networks:
+      - cas-net
+    restart: unless-stopped
+  cas_multimon-ng2redis:
+    image: tobsa/cas_multimon-ng2redis:latest
+    volumes:
+      - /opt/cas/pulse.socket:/tmp/pulseaudio.socket
+      - /opt/cas/config.json:/opt/config.json:ro
+    environment:
+      REDIS_HOST: redis
+      PULSE_SERVER: "unix:/tmp/pulseaudio.socket"
+    depends_on:
+      - redis
+    networks:
+      - cas-net
+    restart: unless-stopped
+  cas_redis2LEDs:
+    image: tobsa/cas_redis2leds:latest
+    volumes:
+      - /opt/cas/config.json:/opt/config.json:ro
+    environment:
+      REDIS_HOST: redis
+    depends_on:
+      - redis
+    networks:
+      - cas-net
+    restart: unless-stopped
+    devices:
+      - "/dev/gpiomem"

@@ -1,0 +1,10 @@
+#!/usr/bin/pulseaudio -nF
+
+load-module module-native-protocol-unix auth-anonymous=1 auth-cookie-enabled=0 socket=/opt/cas/pulse.socket
+
+load-module module-alsa-card device_id="0" name="audioinjector" card_name="alsa_card.audioinjector" tsched=yes fixed_latency_range=no ignore_dB=no deferred_volume=yes use_ucm=yes avoid_resampling=no
+
+set-source-mute 1 0
+set-source-volume 1 65535
+set-source-port 1 analog-input-linein
+set-default-source 1
