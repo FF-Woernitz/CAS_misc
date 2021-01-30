@@ -3,7 +3,6 @@ networks:
   cas-net:
     driver: bridge
 
-
 services:
   redis:
     image: "redis:alpine"
@@ -38,6 +37,19 @@ services:
     restart: unless-stopped
   cas_redis2LEDs:
     image: tobsa/cas_redis2leds:latest
+    volumes:
+      - /opt/cas/config.json:/opt/config.json:ro
+    environment:
+      REDIS_HOST: redis
+    depends_on:
+      - redis
+    networks:
+      - cas-net
+    restart: unless-stopped
+    devices:
+      - "/dev/gpiomem"
+  cas_redis2local:
+    image: tobsa/cas_redis2local:latest
     volumes:
       - /opt/cas/config.json:/opt/config.json:ro
     environment:
