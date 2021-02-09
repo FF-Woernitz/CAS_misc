@@ -11,7 +11,7 @@ services:
     networks:
       - cas-net
     restart: unless-stopped
-  cas_redis2divera247:
+  cas_redis2http:
     image: tobsa/cas_redis2http:latest
     volumes:
       - /opt/cas/config.json:/opt/config.json:ro
