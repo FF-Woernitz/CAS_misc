@@ -1,45 +1,43 @@
 {
-  "trigger": {
-    "zvei": {
-      "56789": {
-        "name": "FF-ABC",
-        "active": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          6,
-          {
-            "weekday": 5,
-            "hour_start": 12,
-            "hour_end": 12,
-            "minute_start": 10,
-            "minute_end": 25
-          }
-        ],
-        "action": [
-          "FF-1",
-          "FF-2"
-        ]
-      },
-      "01234": {
-        "name": "FF-DEF",
-        "inactive": [
-          {
-            "weekday": 5,
-            "hour_start": 12,
-            "hour_end": 12,
-            "minute_start": 10,
-            "minute_end": 25
-          }
-        ],
-        "action": [
-          "FF-1"
-        ]
-      }
+  "trigger": [
+    {
+      "name": "FF-ABC",
+      "zvei": "01234",
+      "active": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        {
+          "weekday": 5,
+          "time_start": [12, 10],
+          "time_end": [12, 25]
+        }
+      ],
+      "action": [
+        "FF-1",
+        "FF-2"
+      ]
+    },
+    {
+      "name": "FF-DEF",
+      "zvei": "56789",
+      "inactive": [
+        {
+          "weekday": 5,
+          "hour_start": 12,
+          "hour_end": 12,
+          "minute_start": 10,
+          "minute_end": 25
+        }
+      ],
+      "action": [
+        "FF-1"
+      ]
     }
-  },
+  ],
   "gpio": {
     "led": {
       "LEDError": 5,
