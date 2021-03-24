@@ -1,35 +1,43 @@
 {
-  "trigger": {
-    "zvei": {
-      "56789": {
-        "name": "FF-ABC",
-        "testalarm": {
+  "trigger": [
+    {
+      "name": "FF-ABC",
+      "zvei": "01234",
+      "active": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        {
           "weekday": 5,
-          "hour_start": 11,
-          "hour_end": 11,
-          "minute_start": 5,
-          "minute_end": 15
-        },
-        "action": [
-          "FF-1",
-          "FF-2"
-        ]
-      },
-      "01234": {
-        "name": "FF-DEF",
-        "testalarm": {
+          "time_start": [12, 10],
+          "time_end": [12, 25]
+        }
+      ],
+      "action": [
+        "FF-1",
+        "FF-2"
+      ]
+    },
+    {
+      "name": "FF-DEF",
+      "zvei": "56789",
+      "inactive": [
+        {
           "weekday": 5,
           "hour_start": 12,
           "hour_end": 12,
           "minute_start": 10,
           "minute_end": 25
-        },
-        "action": [
-          "FF-1"
-        ]
-      }
+        }
+      ],
+      "action": [
+        "FF-1"
+      ]
     }
-  },
+  ],
   "gpio": {
     "led": {
       "LEDError": 5,
@@ -43,35 +51,28 @@
     }
   },
   "action": {
-    "FF-1": {
-      "http": {
+    "FF-1": [
+      {
         "name": "GroupAlarm",
-        "type": "GET",
-        "params": {
-          "accesskey": "ABC",
-          "type": "Sirenen Alarm"
-        }
-      }
-    },
-    "FF-2": {
-      "local": [
-        {
-          "name": "",
-          "type": "relay",
-          "conf": {
-            "relay": "1",
-            "time": 2
+        "type": "http",
+        "data": {
+          "type": "GET",
+          "params": {
+            "accesskey": "ABC",
+            "type": "Sirenen Alarm"
           }
         }
-      ],
-      "http": {
-        "name": "Divera",
-        "type": "GET",
-        "params": {
-          "accesskey": "DEF",
-          "type": "Einsatz"
+      }
+    ],
+    "FF-2": [
+      {
+        "name": "Tuersteuerung",
+        "type": "local",
+        "data": {
+          "relay": "1",
+          "time": 2
         }
       }
-    }
+    ]
   }
 }
