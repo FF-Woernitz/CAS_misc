@@ -12,8 +12,7 @@
         6,
         {
           "weekday": 5,
-          "time_start": [12, 10],
-          "time_end": [12, 25]
+          "between": [[12, 10], [12, 15]]
         }
       ],
       "action": [
