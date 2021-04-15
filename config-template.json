@@ -63,9 +63,13 @@
       "name": "GroupAlarm",
       "type": "http",
       "data": {
-        "type": "GET",
-        "params": {
-          "accesskey": "ABC",
+        "method": "GET",
+        "url": "https://tobsa.wtf",
+        "payload": {
+          "params": {
+            "accesskey": "ABC",
+
+          },
           "type": "Sirenen Alarm"
         }
       }
