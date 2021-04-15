@@ -11,8 +11,19 @@ services:
     networks:
       - cas-net
     restart: unless-stopped
+  cas_brain:
+    image: tobsa/cas_brain:master
+    volumes:
+      - /opt/cas/config.json:/opt/config.json:ro
+    environment:
+      REDIS_HOST: redis
+    depends_on:
+      - redis
+    networks:
+      - cas-net
+    restart: unless-stopped
   cas_redis2http:
-    image: tobsa/cas_redis2http:latest
+    image: tobsa/cas_redis2http:master
     volumes:
       - /opt/cas/config.json:/opt/config.json:ro
     environment:
@@ -23,20 +34,20 @@ services:
       - cas-net
     restart: unless-stopped
   cas_multimon-ng2redis:
-    image: tobsa/cas_multimon-ng2redis:latest
+    image: tobsa/cas_multimon-ng2redis:master
     volumes:
-      - /opt/cas/pulse.socket:/tmp/pulseaudio.socket
+      - /var/run/pulse:/tmp/pulse
       - /opt/cas/config.json:/opt/config.json:ro
     environment:
       REDIS_HOST: redis
-      PULSE_SERVER: "unix:/tmp/pulseaudio.socket"
+      PULSE_SERVER: "unix:/tmp/pulse/native"
     depends_on:
       - redis
     networks:
       - cas-net
     restart: unless-stopped
   cas_redis2LEDs:
-    image: tobsa/cas_redis2leds:latest
+    image: tobsa/cas_redis2leds:master
     volumes:
       - /opt/cas/config.json:/opt/config.json:ro
     environment:
@@ -49,7 +60,7 @@ services:
     devices:
       - "/dev/gpiomem"
   cas_redis2local:
-    image: tobsa/cas_redis2local:latest
+    image: tobsa/cas_redis2local:master
     volumes:
       - /opt/cas/config.json:/opt/config.json:ro
     environment:
