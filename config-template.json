@@ -64,13 +64,12 @@
       "type": "http",
       "data": {
         "method": "GET",
-        "url": "https://tobsa.wtf",
+        "url": "https://enrghw8927ydj.x.pipedream.net",
         "payload": {
           "params": {
             "accesskey": "ABC",
-
-          },
-          "type": "Sirenen Alarm"
+            "title": "TEST"
+          }
         }
       }
     },
