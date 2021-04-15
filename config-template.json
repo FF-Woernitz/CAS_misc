@@ -12,7 +12,16 @@
         6,
         {
           "weekday": 5,
-          "between": [[12, 10], [12, 15]]
+          "between": [
+            [
+              12,
+              10
+            ],
+            [
+              12,
+              15
+            ]
+          ]
         }
       ],
       "action": [
@@ -50,28 +59,27 @@
     }
   },
   "action": {
-    "FF-1": [
-      {
-        "name": "GroupAlarm",
-        "type": "http",
-        "data": {
-          "type": "GET",
+    "FF-1": {
+      "name": "GroupAlarm",
+      "type": "http",
+      "data": {
+        "method": "GET",
+        "url": "https://enrghw8927ydj.x.pipedream.net",
+        "payload": {
           "params": {
             "accesskey": "ABC",
-            "type": "Sirenen Alarm"
+            "title": "TEST"
           }
         }
       }
-    ],
-    "FF-2": [
-      {
-        "name": "Tuersteuerung",
-        "type": "local",
-        "data": {
-          "relay": "1",
-          "time": 2
-        }
+    },
+    "FF-2": {
+      "name": "Tuersteuerung",
+      "type": "local",
+      "data": {
+        "relay": "1",
+        "time": 2
       }
-    ]
+    }
   }
 }
